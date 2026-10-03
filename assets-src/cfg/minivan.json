@@ -1,0 +1,1 @@
+{"src": "assets-src/prep/carpack.glb", "out": "assets-src/baked/minivan", "keep_radius": [-6.33, 2.05, 2.7], "length": 4.9, "rotZ": 0, "paint": "^Body", "glass": "^Glass", "glass_only_rx": true, "lod0": 6000, "lod1": 800, "tex": 512, "pca": true, "emit_base": "^Optics"}

@@ -1,0 +1,1 @@
+{"src": "assets-src/prep/kmb.glb", "out": "assets-src/baked/bus", "length": 12.0, "rotZ": 180, "drop": "Cseat|^seat|stair|support|tube|floor|wheelchair|inWall", "glass": "^wins$|^door$", "glass_only_rx": true, "lod0": 12000, "lod1": 1500, "tex": 1024, "emit_base": "^lamp$"}

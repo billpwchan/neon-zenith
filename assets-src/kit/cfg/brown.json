@@ -1,0 +1,4 @@
+{"src": "assets-src/prep/hk3.glb", "out": "assets-src/kit/raw/brown.glb", "scale": 1.42857,
+ "grid": {"x0": -4.7, "xs": [-4.7, -1.7, 0.3, 2.6, 4.7], "bay": 2.35, "nb": 4, "y0": 9.79, "pitch": 2.17, "nf": 3},
+ "lod0": {"x0": -4.7, "x1": 4.7, "ymax": 16.4, "zmin": 0.2}, "lod1": {"simplify": 0.3},
+ "wall": -1.08, "zcut": 0.2, "whole": 1.4, "decimate": [["^Merged_materials$", 0.4]], "drop": "^Material\\.057$"}

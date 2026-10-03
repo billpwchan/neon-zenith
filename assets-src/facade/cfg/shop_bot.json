@@ -1,0 +1,1 @@
+{"src": "assets-src/prep/shop.glb", "out": "assets-src/facade/raw/shop_bot", "rect": [21.27, 45.6, -3, 0], "px": [4866, 600], "glass": "window|glass|^shop4\\.01[67]$", "frame": "emmisive|emission", "hide": "^Material\\.157$"}

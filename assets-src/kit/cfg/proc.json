@@ -1,0 +1,4 @@
+{"src": "assets-src/prep/proc.glb", "out": "assets-src/kit/raw/proc.glb", "scale": 3.1,
+ "grid": {"x0": -2.927, "bay": 1.0, "nb": 7, "y0": 1.137, "pitch": 1.0, "nf": 5},
+ "lod0": {"x0": -2.927, "x1": 4.073, "ymax": 7.0, "zmin": 1.6}, "lod1": {"simplify": 0.35},
+ "wall": -2.0, "zcut": 1.6, "whole": 0.9}

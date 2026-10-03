@@ -1,0 +1,25 @@
+node_modules/
+dist/
+.cache/
+.DS_Store
+*.log
+
+# Source assets are large and come from their own sites (see CREDITS.md); only the pipeline scripts and their
+# configs are tracked. The packed, game-ready output lives in public/.
+/assets_src/
+/assets-src/**
+!/assets-src/**/
+!/assets-src/*.py
+!/assets-src/*.mjs
+!/assets-src/cfg/*.json
+!/assets-src/facade/cfg/*.json
+!/assets-src/kit/cfg/*.json
+!/assets-src/district/*.py
+!/assets-src/district/*.mjs
+!/assets-src/district/layout.json
+!/assets-src/district/cfg.json
+!/assets-src/shopkit/cfg.json
+
+# per-machine deploy settings
+/deploy/local.conf
+/deploy/local/

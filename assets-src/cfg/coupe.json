@@ -1,0 +1,1 @@
+{"src": "assets-src/prep/carpack.glb", "out": "assets-src/baked/coupe", "keep_radius": [-6.1, -1.99, 2.7], "length": 4.5, "rotZ": 0, "paint": "^Body", "glass": "^Glass", "glass_only_rx": true, "lod0": 6000, "lod1": 800, "tex": 512, "pca": true, "emit_base": "^Optics"}

@@ -1,0 +1,12 @@
+{"src": "assets-src/prep/shop.glb", "out": "assets-src/shopkit/raw.glb",
+ "drop": "^Material\\.157$", "wall": 0.1,
+ "modules": [
+  {"name": "florist", "x0": 40.31, "x1": 41.7, "z0": 0, "z1": 3},
+  {"name": "noodle", "x0": 41.7, "x1": 43.3, "z0": 0, "z1": 3},
+  {"name": "ginseng", "x0": 43.3, "x1": 45.6, "z0": 0, "z1": 3},
+  {"name": "door", "x0": 27.9, "x1": 29.24, "z0": -3, "z1": 0},
+  {"name": "travel", "x0": 29.24, "x1": 31.12, "z0": -3, "z1": 0},
+  {"name": "shutter", "x0": 31.12, "x1": 32.28, "z0": -3, "z1": 0},
+  {"name": "dessert", "x0": 37.57, "x1": 39.71, "z0": -3, "z1": 0},
+  {"name": "pawn", "x0": 39.71, "x1": 41.28, "z0": -3, "z1": 0}
+ ]}

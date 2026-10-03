@@ -1,0 +1,6 @@
+# A site block for a Caddy reverse proxy on the same Docker network as the container.
+# Point GATEWAY_FRAGMENT in deploy/local.conf at your copy and import it from the proxy's Caddyfile.
+zenith.example.com {
+	encode zstd gzip
+	reverse_proxy neon-zenith:8080
+}
