@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://zenith.52-198-144-26.sslip.io/"><img src="docs/media/hero.jpg" alt="Neon Zenith title screen: Temple Street at night in the rain, neon signs reflected in the wet road" width="100%"></a>
+<a href="https://zenith.billpwchan.art/"><img src="docs/media/hero.jpg" alt="Neon Zenith title screen: Temple Street at night in the rain, neon signs reflected in the wet road" width="100%"></a>
 
 # 霓虹天頂 · Neon Zenith
 
@@ -8,7 +8,7 @@
 
 Drive the Temple Street night market, lift off into the sky lanes, punch through the storm deck<br>and land on a spire 1,418 metres up. Real-time, open source, built on three.js WebGPU.
 
-**[▶ Play it now](https://zenith.52-198-144-26.sslip.io/)** &nbsp;·&nbsp; [How it works](#how-it-works) &nbsp;·&nbsp; [Run it locally](#run-it-locally) &nbsp;·&nbsp; [Credits](CREDITS.md)
+**[▶ Play it now](https://zenith.billpwchan.art/)** &nbsp;·&nbsp; [How it works](#how-it-works) &nbsp;·&nbsp; [Run it locally](#run-it-locally) &nbsp;·&nbsp; [Credits](CREDITS.md)
 
 [![three.js r186](https://img.shields.io/badge/three.js-r186-000?logo=three.js&logoColor=white)](https://threejs.org)
 [![WebGPU + WebGL2](https://img.shields.io/badge/WebGPU-WebGL2_fallback-ff3df2)](#browser-support)
@@ -177,6 +177,16 @@ src/
 assets-src/  Blender and Node pipelines that turn source models into public/
 scripts/     screenshot and timing harness, sign atlas baker
 ```
+
+## More scenes
+
+The same author's other real-time scenes, each open source and running in the browser.
+
+<table><tr>
+<td width="33%" valign="top"><a href="https://github.com/billpwchan/sakura-fantasy"><img src="https://raw.githubusercontent.com/billpwchan/sakura-fantasy/main/docs/media/social-preview.jpg" alt="桜幻想 Sakura Fantasy"></a><br><b><a href="https://github.com/billpwchan/sakura-fantasy">桜幻想 Sakura Fantasy</a></b><br><sub>A boat journey through a Japanese river valley in four seasons · <a href="https://sakura.billpwchan.art/">live</a></sub></td>
+<td width="33%" valign="top"><a href="https://github.com/billpwchan/halcyon"><img src="https://raw.githubusercontent.com/billpwchan/halcyon/main/docs/media/social-preview.jpg" alt="Halcyon"></a><br><b><a href="https://github.com/billpwchan/halcyon">Halcyon</a></b><br><sub>A tropical atoll through one day: FFT ocean, reef, bioluminescent night · <a href="https://halcyon.billpwchan.art/">live</a></sub></td>
+<td width="33%" valign="top"><a href="https://github.com/billpwchan/utsuroi"><img src="https://raw.githubusercontent.com/billpwchan/utsuroi/main/docs/media/social-preview.jpg" alt="移ろい Utsuroi"></a><br><b><a href="https://github.com/billpwchan/utsuroi">移ろい Utsuroi</a></b><br><sub>A Kyoto house and garden, walked from first light to last · <a href="https://utsuroi.billpwchan.art/">live</a></sub></td>
+</tr></table>
 
 ## Credits
 

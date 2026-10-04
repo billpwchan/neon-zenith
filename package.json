@@ -5,7 +5,7 @@
   "description": "A rain-soaked vertical cyberpunk city you can fly through in the browser. three.js WebGPU + TSL.",
   "license": "MIT",
   "author": "Bill Chan (https://github.com/billpwchan)",
-  "homepage": "https://zenith.52-198-144-26.sslip.io/",
+  "homepage": "https://zenith.billpwchan.art/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/billpwchan/neon-zenith.git"
