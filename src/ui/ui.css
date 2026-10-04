@@ -85,6 +85,7 @@
 .btn .zh { font-size: 15px; letter-spacing: 0.12em; }
 .btn:hover, .btn:focus-visible, .btn.sel { border-color: var(--cyan); background: rgba(59, 232, 255, 0.1); color: #fff; outline: none; box-shadow: inset 0 0 18px rgba(59, 232, 255, 0.15); }
 .btn.primary { border-color: rgba(255, 61, 242, 0.7); background: rgba(255, 61, 242, 0.12); }
+.btn.ghost { color: var(--ink-dim); background: rgba(10, 14, 28, 0.3); border-color: rgba(150, 225, 255, 0.12); text-decoration: none; }
 .btn.primary:hover, .btn.primary.sel { border-color: var(--mag); background: rgba(255, 61, 242, 0.22); box-shadow: inset 0 0 18px rgba(255, 61, 242, 0.25); }
 .t-foot { position: absolute; right: var(--gutter); bottom: var(--gutter); text-align: right; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.12em; line-height: 1.8; }
 .t-press { margin-top: 26px; font-size: 11px; letter-spacing: 0.4em; color: var(--ink-dim); opacity: 0; transition: opacity 1s ease 1.8s; }
@@ -183,6 +184,8 @@ input[type='range']::-moz-range-thumb { width: 12px; height: 12px; background: v
 .cred p { grid-column: 1 / -1; margin: 14px 0 0; font-size: 11px; line-height: 1.6; color: var(--ink-dim); letter-spacing: 0.04em; }
 .cred p a { color: var(--ink); text-decoration: underline; text-decoration-color: rgba(150, 225, 255, 0.35); text-underline-offset: 3px; }
 .cred p a:hover { color: #fff; }
+.cred p.src { margin-top: 10px; color: var(--ink); }
+.cred p.src .zh { margin-right: 10px; color: var(--ink-dim); }
 .runs { display: grid; gap: 10px; }
 .runc { pointer-events: auto; cursor: pointer; display: grid; grid-template-columns: 54px 1fr auto; gap: 16px; align-items: center; padding: 14px 16px; border: 1px solid var(--line); background: rgba(12, 16, 30, 0.6); transition: border-color 0.2s, background 0.2s; }
 .runc:hover, .runc.sel { border-color: var(--mag); background: rgba(255, 61, 242, 0.08); }

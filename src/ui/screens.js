@@ -19,6 +19,8 @@ const CONTROLS = [
   ['手掣 Gamepad', 'RT/LT · L-stick · R-stick lift · RB boost'],
 ];
 
+const REPO = 'https://github.com/billpwchan/neon-zenith';
+
 // third-party models in the build, and what each licence asks
 const CREDITS = [
   ['Lotus Esprit Hover GT 2076', 'maomornity', 'CC BY 4.0', '79fef7f8b1174bf69305e8c28431d26d', 'your car'],
@@ -54,6 +56,7 @@ export class Screens {
             <button class="btn" data-act="settings"><span class="zh">設定</span>SETTINGS</button>
             <button class="btn" data-act="controls"><span class="zh">操作</span>CONTROLS</button>
             <button class="btn" data-act="credits"><span class="zh">鳴謝</span>CREDITS</button>
+            <a class="btn ghost" href="${REPO}" target="_blank" rel="noopener"><span class="zh">源碼</span>GITHUB ★</a>
           </div>
           <div class="t-press">PRESS ENTER</div>
         </div>
@@ -86,6 +89,7 @@ export class Screens {
       this.cb.onUi?.();
       this.act(b.dataset.act, b.dataset);
     });
+    root.addEventListener('click', (e) => { const a = e.target.closest('a[target=_blank]'); if (a) setTimeout(() => a.blur(), 0); });
     this.view = { cx: 0, cz: 0, zoom: 1 };
     this.bindMap();
   }
@@ -162,7 +166,8 @@ export class Screens {
         <div class="row"><span><span class="zh">鏡頭晃動</span>CAMERA SHAKE</span>${seg('shake', [[1, 'ON'], [0, 'OFF']])}</div>`;
     } else if (tab === 'credits') {
       body = `<div class="cred">${CREDITS.map(([name, by, lic, id, use]) => `<a href="https://sketchfab.com/3d-models/${id}" target="_blank" rel="noopener"><span>${name}<small>${use}</small></span><span>${by}<small>${lic}</small></span></a>`).join('')}
-        <p>Textures, air-conditioners, crates and bags: Poly Haven, CC0. Fonts: Chiron Hei HK, Chiron Sung HK, Oxanium, JetBrains Mono, Monoton, Tilt Neon, Neonderthaw, LXGW WenKai TC, Noto Serif TC, under the SIL Open Font License. Every model above has been modified: re-textured, re-lit, and decimated for distance. Licences: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>, <a href="https://sketchfab.com/licenses" target="_blank" rel="noopener">Sketchfab Free Standard</a>, <a href="https://openfontlicense.org" target="_blank" rel="noopener">SIL OFL 1.1</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a>.</p></div>`;
+        <p>Textures, air-conditioners, crates and bags: Poly Haven, CC0. Distant office facades: ambientCG, CC0. Fonts: Chiron Hei HK, Chiron Sung HK, Oxanium, JetBrains Mono, Monoton, Tilt Neon, Neonderthaw, LXGW WenKai TC, Noto Serif TC, under the SIL Open Font License. The models were re-exported and compressed for the web, and the building models sliced and rendered into facades; <a href="${REPO}/blob/main/CREDITS.md" target="_blank" rel="noopener">CREDITS.md</a> has the details. Licences: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>, <a href="https://openfontlicense.org" target="_blank" rel="noopener">SIL OFL 1.1</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a>.</p>
+        <p class="src"><span class="zh">源碼</span>Neon Zenith is open source under the MIT licence: <a href="${REPO}" target="_blank" rel="noopener">github.com/billpwchan/neon-zenith</a> ★</p></div>`;
     } else {
       body = `<div class="ctl">${CONTROLS.map(([a, k]) => `<div><span>${a}</span><span>${k}</span></div>`).join('')}</div>`;
     }
