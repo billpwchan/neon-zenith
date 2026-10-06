@@ -178,6 +178,10 @@ assets-src/  Blender and Node pipelines that turn source models into public/
 scripts/     screenshot and timing harness, sign atlas baker
 ```
 
+## How it was made
+
+Built over a weekend in October 2026 with [Claude Code](https://claude.com/claude-code) running **Claude Opus 5.5**. I set the direction and reviewed every pass from screenshots and real-GPU frame timings; the model wrote the code, the TSL shaders and the Blender pipelines.
+
 ## More scenes
 
 The same author's other real-time scenes, each open source and running in the browser.
