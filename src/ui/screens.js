@@ -20,6 +20,7 @@ const CONTROLS = [
 ];
 
 const REPO = 'https://github.com/billpwchan/neon-zenith';
+const SITE = 'https://zenith.billpwchan.art';
 
 // third-party models in the build, and what each licence asks
 const CREDITS = [
@@ -110,6 +111,7 @@ export class Screens {
     else if (a === 'set') { this.settings[data.k] = isNaN(+data.v) ? data.v : +data.v; cb.onSetting(data.k); this.showPause(this.tab); }
     else if (a === 'closeres') this.closeResults();
     else if (a === 'retry') { this.closeResults(); cb.onRun(+data.i); }
+    else if (a === 'share') this.shareRun(+data.i, +data.t, data.m);
   }
 
   showTitle(on) {
@@ -295,8 +297,22 @@ export class Screens {
       <div class="big">${fmtTime(time)}</div>
       <div class="sub">BEST ${fmtTime(best)}</div>
       <div class="medalrow">${r.medals.map((m, k) => `<span class="${time <= m ? 'got' : ''}">${names[k]} ${fmtTime(m)}<span class="medal ${['gold', 'silver', 'bronze'][k]}" style="opacity:${time <= m ? 1 : 0.2}"></span></span>`).join('')}</div>
-      <div class="foot"><button class="btn" data-act="retry" data-i="${i}"><span class="zh">再來</span>RETRY · R</button><button class="btn primary" data-act="closeres"><span class="zh">繼續</span>CONTINUE · ENTER</button></div>`;
+      <div class="foot"><button class="btn" data-act="share" data-i="${i}" data-t="${time}" data-m="${medal || ''}"><span class="zh">分享</span>SHARE</button><button class="btn" data-act="retry" data-i="${i}"><span class="zh">再來</span>RETRY · R</button><button class="btn primary" data-act="closeres"><span class="zh">繼續</span>CONTINUE · ENTER</button></div>
+      <a class="src" href="${REPO}" target="_blank" rel="noopener"><span class="zh">源碼</span>OPEN SOURCE ON GITHUB ★</a>`;
     this.results.classList.remove('hidden');
+  }
+
+  // a time to beat travels with a link that drops the reader straight into the same run
+  async shareRun(i, t, medal) {
+    const r = this.runs.list[i];
+    const url = `${SITE}/?run=${i}`;
+    const text = `${r.en} ${r.zh} · ${fmtTime(t)}${medal ? ` · ${medal.toUpperCase()}` : ''} in Neon Zenith. Beat it, in your browser:`;
+    const btn = this.results.querySelector('[data-act=share]');
+    try {
+      if (navigator.share && matchMedia('(pointer: coarse)').matches) { await navigator.share({ title: 'Neon Zenith 霓虹天頂', text, url }); return; }
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      btn.innerHTML = '<span class="zh">已複製</span>LINK COPIED';
+    } catch { /* share sheet dismissed or clipboard denied */ }
   }
 
   closeResults() {

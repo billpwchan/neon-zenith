@@ -214,6 +214,9 @@ input[type='range']::-moz-range-thumb { width: 12px; height: 12px; background: v
 #results .sub { font-size: 12px; letter-spacing: 0.3em; color: var(--ink-dim); }
 #results .medalrow { display: flex; gap: 22px; margin: 22px 0 6px; font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
 #results .medalrow .got { color: var(--ink); }
+#results .src { display: block; margin-top: 18px; text-align: right; font-size: 11px; letter-spacing: 0.24em; color: var(--ink-dim); text-decoration: none; }
+#results .src .zh { margin-right: 10px; letter-spacing: 0.12em; }
+#results .src:hover { color: var(--ink); }
 
 /* ---------- touch ---------- */
 #touch { position: absolute; inset: 0; pointer-events: none; }
