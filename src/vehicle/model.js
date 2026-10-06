@@ -66,6 +66,8 @@ export function createReflectionProbe(size = 128) {
   let face = 0;
   return {
     texture: rt.texture,
+    rt,
+    cam,
     update(renderer, scene, pos, hide, faces = 2) {
       cam.position.copy(pos);
       cam.position.y += 0.8; // the middle of the body, not the road

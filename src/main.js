@@ -237,7 +237,23 @@ async function boot() {
       o.visible = true;
     });
     await progress(0.75, 'COMPILING SHADERS · 編譯著色器');
-    await renderer.compileAsync(scene, camera);
+    // compileAsync builds for the current render target, and the scene is never drawn straight to the canvas: it goes
+    // into the post pass, the ground mirror and the car's cube probe. Compiled for the canvas, every one of those
+    // variants was built synchronously in the first frames instead (a 0.5–3 s freeze on the title screen).
+    // The render context is also keyed by call depth, and compileAsync always looks its context up at depth 0. The
+    // scene pass draws at depth 2: the output quad renders FXAA's render-to-texture, which renders the scene pass.
+    // Measured with renderer._renderContexts; if the post chain changes, so does this number.
+    const prevTarget = renderer.getRenderTarget();
+    const contexts = renderer._renderContexts, getContext = contexts.get;
+    const jobs = [];
+    for (const [target, cam, depth] of [[post.scenePass.renderTarget, camera, 2], [ground.reflRT, ground.mirrorCam, 0], [probe.rt, probe.cam.children[0], 0]]) {
+      renderer.setRenderTarget(target);
+      contexts.get = (rt, mrt) => getContext.call(contexts, rt, mrt, depth);
+      jobs.push(renderer.compileAsync(scene, cam));
+      contexts.get = getContext;
+    }
+    renderer.setRenderTarget(prevTarget);
+    await Promise.all(jobs);
     await progress(0.95, 'IGNITION · 點火');
     ground.updateReflection(renderer, scene, camera, true);
     post.render();
