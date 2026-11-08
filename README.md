@@ -15,6 +15,7 @@ Drive the Temple Street night market, lift off into the sky lanes, punch through
 [![TSL](https://img.shields.io/badge/shaders-100%25_TSL-3be8ff)](https://github.com/mrdoob/three.js/wiki/Three.js-Shading-Language)
 [![License: MIT](https://img.shields.io/badge/code-MIT-ffb547)](LICENSE)
 [![build](https://github.com/billpwchan/neon-zenith/actions/workflows/build.yml/badge.svg)](https://github.com/billpwchan/neon-zenith/actions/workflows/build.yml)
+[![Featured in Ruan Yifeng's weekly, issue 415](https://img.shields.io/badge/featured%20in-%E7%A7%91%E6%8A%80%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A%20%23415-ff3df2)](https://github.com/ruanyf/weekly/blob/master/docs/issue-415.md)
 
 </div>
 
