@@ -127,7 +127,7 @@ This needs Node 20.19+. `npm run build` writes a static site to `dist/`, which y
 
 ### Browser support
 
-WebGPU runs in Chrome and Edge 113+, Safari 26+ and Firefox 141+ on Windows. Other browsers fall back to WebGL2 automatically. Add `?webgl` to force the fallback.
+WebGPU runs in Chrome and Edge 113+ (Chrome 121+ on Android 12+), Safari 26+, Firefox 141+ on Windows and Firefox 145+ on Apple-silicon Macs with macOS 26. Other browsers fall back to WebGL2 automatically. Add `?webgl` to force the fallback.
 
 ### Debug URLs
 
