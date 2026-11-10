@@ -7,10 +7,17 @@
     <title>NEON ZENITH · 霓虹天頂</title>
     <meta name="description" content="A rain-soaked Hong Kong megacity at night, from the neon street to above the storm. Drive, then fly. WebGPU, Three.js and TSL." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style>
+      /* until the bundle runs, the static loader sets in system faces: the webfonts (CJK slices included) would
+         otherwise download alongside the bundle and hold it up on a slow link */
+      #loader.boot, #loader.boot * { font-family: ui-monospace, Menlo, 'PingFang TC', 'Microsoft JhengHei', monospace !important; }
+    </style>
   </head>
   <body>
     <canvas id="gl"></canvas>
-    <div id="ui"></div>
+    <div id="ui"><div id="fade"></div><div id="loader" class="boot"><div class="lw">
+      <div class="lt"><b>NEON ZENITH</b> · 霓虹天頂</div><div class="bar"><i></i></div><div class="st">BOOTING</div>
+      <a class="src" href="https://github.com/billpwchan/neon-zenith" target="_blank" rel="noopener"><span class="zh">源碼</span>OPEN SOURCE ON GITHUB ★</a></div></div></div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

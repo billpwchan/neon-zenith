@@ -22,7 +22,7 @@ import { createZenith } from './city/zenith.js';
 import './ui/base.css';
 import './ui/ui.css';
 import { Hud } from './ui/hud.js';
-import { Screens, REPO } from './ui/screens.js';
+import { Screens } from './ui/screens.js';
 import { drawCityMap } from './ui/citymap.js';
 import { createTouch, isTouch } from './ui/touch.js';
 import { Sound } from './audio/audio.js';
@@ -49,9 +49,8 @@ function loadSettings() {
 }
 
 const ui = document.getElementById('ui');
-ui.insertAdjacentHTML('beforeend', `<div id="fade"></div><div id="loader"><div class="lw">
-  <div class="lt"><b>NEON ZENITH</b> · 霓虹天頂</div><div class="bar"><i></i></div><div class="st">BOOTING</div>
-  <a class="src" href="${REPO}" target="_blank" rel="noopener"><span class="zh">源碼</span>OPEN SOURCE ON GITHUB ★</a></div></div>`);
+// #fade and #loader are static markup in index.html, so the loader paints before this bundle arrives
+ui.querySelector('#loader').classList.remove('boot');
 const loaderBar = ui.querySelector('#loader .bar i'), loaderSt = ui.querySelector('#loader .st');
 function progress(f, text) {
   loaderBar.style.width = `${Math.round(f * 100)}%`;
