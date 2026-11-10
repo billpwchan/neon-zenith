@@ -23,7 +23,7 @@ Drive the Temple Street night market, lift off into the sky lanes, punch through
 
 <p align="center">
   <img src="docs/media/sky-lane.webp" alt="Flying the SKY LANE time trial at 168 metres over the city, through magenta gates" width="100%">
-  <br><sub>The <b>SKY LANE</b> time trial, recorded in real time at 60 fps (autopilot at the stick).</sub>
+  <br><sub>The <b>SKY LANE</b> time trial with the autopilot at the stick, captured frame by frame from the running game.</sub>
 </p>
 
 ## The city
