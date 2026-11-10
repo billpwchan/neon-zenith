@@ -19,7 +19,7 @@ const CONTROLS = [
   ['手掣 Gamepad', 'RT/LT · L-stick · R-stick lift · RB boost'],
 ];
 
-const REPO = 'https://github.com/billpwchan/neon-zenith';
+export const REPO = 'https://github.com/billpwchan/neon-zenith';
 const SITE = 'https://zenith.billpwchan.art';
 
 // third-party models in the build, and what each licence asks

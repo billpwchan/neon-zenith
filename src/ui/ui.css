@@ -42,6 +42,9 @@
 #loader .bar { height: 1px; background: var(--ink-faint); margin: 18px 0 12px; position: relative; overflow: hidden; }
 #loader .bar i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--cyan); box-shadow: var(--glow); transition: width 0.35s ease; }
 #loader .st { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.08em; min-height: 1.4em; }
+#loader .src { display: inline-block; margin-top: 30px; padding: 8px 0; font-size: 11px; letter-spacing: 0.24em; color: var(--ink-dim); text-decoration: none; }
+#loader .src .zh { margin-right: 10px; letter-spacing: 0.12em; }
+#loader .src:hover { color: var(--ink); }
 #loader .err { color: #ff7a8a; font-family: var(--mono); font-size: 12px; margin-top: 18px; white-space: pre-wrap; max-width: 80vw; }
 
 /* ---------- title ---------- */
