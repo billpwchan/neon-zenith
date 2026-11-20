@@ -183,6 +183,8 @@ scripts/     screenshot and timing harness, sign atlas baker
 
 Built over a weekend in October 2026 with [Claude Code](https://claude.com/claude-code) running **Claude Opus 5.5**. I set the direction and reviewed every pass from screenshots and real-GPU frame timings; the model wrote the code, the TSL shaders and the Blender pipelines.
 
+The starting point was [threejspunk.com](https://www.threejspunk.com/): the first instruction was to study it and build something beyond it.
+
 ## More scenes
 
 The same author's other real-time scenes, each open source and running in the browser.
