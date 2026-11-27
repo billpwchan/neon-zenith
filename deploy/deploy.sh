@@ -1,48 +1,53 @@
 #!/usr/bin/env bash
-# Build and release to the Lightsail host: a new timestamped release, `current` repointed, container recreated.
-# Earlier releases stay in /opt/neon-zenith/releases for rollback (repoint `current`, then recreate).
-# compose.yaml is installed at /opt/neon-zenith/, where its ./current and ./deploy paths resolve.
-# The container serves on :8080 inside a Docker network shared with your reverse proxy (GATEWAY_NETWORK).
-# A proxy site block (GATEWAY_FRAGMENT, see gateway.caddy.example) is copied but not reloaded: validate and
-# reload the proxy by hand after changing it.
-# Settings come from the environment or deploy/local.conf (not tracked):
-#   KEY=<ssh key file>  HOST=user@host  SITE=https://zenith.example.com/
-#   GATEWAY_NETWORK=proxy  GATEWAY_FRAGMENT=deploy/local/gateway.caddy
+# Build and release to a host whose Caddy serves the site straight from /srv/sites/neon-zenith: the build becomes a
+# new timestamped release, `current` is swapped to it atomically and older releases are removed. Caddy resolves
+# `current` on every request, so nothing restarts.
+# GATEWAY_FRAGMENT names the site block (deploy/gateway.caddy.example shows its shape). When FRAGMENT_INSTALLER is set
+# and the block differs from the installed one, the host runs `$FRAGMENT_INSTALLER install zenith <block>`; the live
+# host uses the shared gateway's install_gateway_site_fragment.sh, which validates the whole configuration, reloads
+# it, and restores the previous block on failure. Without it, install the block in your Caddy by hand.
+# The target comes from the environment or from deploy/local.conf (not committed):
+#   HOST=user@host   KEY=/path/to/ssh-key   SITE=https://your.host/ (checked after the release)
+#   GATEWAY_FRAGMENT=deploy/local/gateway.caddy
+#   FRAGMENT_INSTALLER=/path/on/host/install_gateway_site_fragment.sh (optional)
 set -euo pipefail
 cd "$(dirname "$0")/.."
 [ -f deploy/local.conf ] && . deploy/local.conf
-: "${KEY:?set KEY (ssh key) in the environment or deploy/local.conf}"
-: "${HOST:?set HOST (user@host)}"
-GATEWAY_NETWORK=${GATEWAY_NETWORK:-proxy}
+: "${HOST:?set HOST (user@host) in the environment or in deploy/local.conf}"
+: "${KEY:?set KEY (ssh key file) in the environment or in deploy/local.conf}"
 STAMP=$(date +%Y%m%d-%H%M%S)
+UPLOAD=zenith-upload
+: "${GATEWAY_FRAGMENT:?set GATEWAY_FRAGMENT to the site block (see deploy/gateway.caddy.example)}"
 
 npm run build
-# Vite stamps its copy of public/ with new mtimes; put the originals back so unchanged files keep their ETag
+# Vite stamps its copy of public/ with new mtimes; put the originals back so unchanged files keep their ETag and
+# link to the previous release
 rsync -a public/ dist/
-# the hashed bundles are named by their content, so a fixed mtime lets an unchanged one link to the previous release
+# the hashed bundles are named by their content, so a fixed mtime lets an unchanged one link too
 find dist/assets -type f -exec touch -t 200001010000 {} +
-ssh -i "$KEY" "$HOST" 'mkdir -p ~/zenith-upload'
-rsync -az --delete -e "ssh -i $KEY" dist/ "$HOST:zenith-upload/dist/"
-rsync -az --delete -e "ssh -i $KEY" deploy/Caddyfile deploy/compose.yaml "$HOST:zenith-upload/deploy/"
-if [ -n "${GATEWAY_FRAGMENT:-}" ]; then rsync -az -e "ssh -i $KEY" "$GATEWAY_FRAGMENT" "$HOST:zenith-upload/deploy/gateway.caddy"; fi
-ssh -i "$KEY" "$HOST" "STAMP=$STAMP GATEWAY_NETWORK=$GATEWAY_NETWORK bash -s" <<'REMOTE'
+ssh -i "$KEY" "$HOST" "mkdir -p ~/$UPLOAD"
+rsync -az --delete -e "ssh -i $KEY" dist/ "$HOST:$UPLOAD/dist/"
+rsync -az -e "ssh -i $KEY" "$GATEWAY_FRAGMENT" "$HOST:$UPLOAD/site.caddy"
+ssh -i "$KEY" "$HOST" "STAMP=$STAMP UPLOAD=$UPLOAD FRAGMENT_INSTALLER=${FRAGMENT_INSTALLER:-} bash -s" <<'REMOTE'
 set -euo pipefail
-R=/opt/neon-zenith
-sudo mkdir -p $R/releases $R/deploy
-# unchanged files are hard links into the previous release, so a release costs only what changed; created as
-# root to match the earlier releases
-PREV=$(readlink -e $R/current || true)
-sudo rsync -a --no-owner --no-group ${PREV:+--link-dest=$PREV/} ~/zenith-upload/dist/ $R/releases/$STAMP/
-sudo cp ~/zenith-upload/deploy/Caddyfile $R/deploy/
-[ -f ~/zenith-upload/deploy/gateway.caddy ] && sudo cp ~/zenith-upload/deploy/gateway.caddy $R/deploy/
-sudo cp ~/zenith-upload/deploy/compose.yaml $R/compose.yaml
-sudo ln -sfn releases/$STAMP $R/current
-sudo chown -R root:root $R
-sudo chmod -R a+rX $R
-# the bind mount resolves `current` when the container starts
-cd $R && sudo env GATEWAY_NETWORK=$GATEWAY_NETWORK docker compose up -d --force-recreate
-for i in $(seq 1 30); do sudo docker exec neon-zenith wget -q -O - http://127.0.0.1:8080/healthz 2>/dev/null && break; sleep 1; done
-echo
+R=/srv/sites/neon-zenith
+sudo install -d -o root -g root -m 0755 "$R/releases"
+PREV=$(readlink -e "$R/current" || true)
+# files unchanged since the previous release (same content and mtime) become hard links into it
+sudo rsync -a --no-owner --no-group ${PREV:+--link-dest="$PREV/"} ~/"$UPLOAD"/dist/ "$R/releases/$STAMP/"
+sudo chown -R root:root "$R/releases/$STAMP"
+sudo chmod -R a+rX "$R/releases/$STAMP"
+# a rename is atomic, so no request finds `current` missing
+sudo ln -sfn "releases/$STAMP" "$R/current.next"
+sudo mv -T "$R/current.next" "$R/current"
+for old in "$R"/releases/*; do
+  [ "$(basename "$old")" = "$STAMP" ] || sudo rm -rf -- "$old"
+done
+if [ -n "$FRAGMENT_INSTALLER" ]; then
+  installed=$("$FRAGMENT_INSTALLER" status zenith 2>/dev/null | awk 'length($1) == 64 { print $1 }' || true)
+  wanted=$(sha256sum < ~/"$UPLOAD"/site.caddy | cut -d' ' -f1)
+  [ "$wanted" = "$installed" ] || "$FRAGMENT_INSTALLER" install zenith ~/"$UPLOAD"/site.caddy
+fi
 echo "released $STAMP"
 REMOTE
 if [ -n "${SITE:-}" ]; then curl -fsS -o /dev/null -w "live %{http_code}\n" "$SITE"; fi
